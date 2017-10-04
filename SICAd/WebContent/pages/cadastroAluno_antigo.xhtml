@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Sistema Acadêmico</title>
+</h:head>
+<h:body>
+<f:view>
+<center>
+	<h2>.:Cadastro de Aluno:.</h2>
+
+	<h:form id="form">
+		<h:messages/>
+		
+	    <hr/>
+	    	
+		<h:panelGrid id="pgDados" columns="2">
+			<h:outputText value="Matrícula:" />
+			<h:inputText value="#{alunoController.entity.matricula}" />
+
+			<h:outputText value="Nome:" />
+			<h:inputText value="#{alunoController.entity.nome}" />
+			
+			<h:outputText value="Natural de:" />
+			<h:selectOneMenu   
+                value="#{alunoController.entity.cidade}"  >  
+                <f:converter converterId="cidadeConverter"/>
+                  
+                <f:selectItems value="#{alunoController.listaCidade}" var="o" itemLabel="#{o.nome}" itemValue="#{o}"/>  
+            </h:selectOneMenu>
+
+		</h:panelGrid>
+
+
+		<h:commandButton value="Incluir" 
+			actionListener="#{alunoController.insert}" 
+			disabled="#{alunoController.entity.id != null}">
+			<f:ajax execute="form:pgDados" render="@form" />
+		</h:commandButton>
+		
+		<h:commandButton value="Alterar" 
+			actionListener="#{alunoController.update}" 
+			disabled="#{alunoController.entity.id == null}">
+			<f:ajax execute="form:pgDados" render="@form" />
+		</h:commandButton>
+
+		<h:commandButton value="Excluir" 
+			actionListener="#{alunoController.delete}" 
+			disabled="#{alunoController.entity.id == null}">		
+			<f:ajax execute="form:pgDados" render="@form" />
+		</h:commandButton>
+		
+		
+		<h:commandButton value="Limpar" actionListener="#{alunoController.clean}" >
+			<f:ajax execute="form:pgDados" render="@form" />
+		</h:commandButton>
+		
+		<hr/>
+
+		<h:dataTable id="dataTable" value="#{alunoController.listaAluno}" var="objeto">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+	    				#{objeto.id}
+	    		</h:column>
+			<h:column>
+				<f:facet name="header">Matricula</f:facet>
+	    				#{objeto.matricula}
+	    		</h:column>
+			<h:column >
+				<f:facet name="header">Nome</f:facet>
+	    				#{objeto.nome}
+	    		</h:column>
+			<h:column >
+				<f:facet name="header">Cidade</f:facet>
+	    				#{objeto.cidade.nome}
+	    		</h:column>
+			<h:column >
+				<f:facet name="header">Ação</f:facet>
+				<h:commandButton value="Editar">
+					<f:setPropertyActionListener
+						target="#{alunoController.entity}" value="#{objeto}" />
+				</h:commandButton>
+			</h:column>
+	    		
+		</h:dataTable>
+	
+	</h:form>
+</center>	
+</f:view>		
+</h:body>
+</html>

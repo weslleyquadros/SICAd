@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/pages/template.xhtml">
+
+<ui:define name="conteudo">
+
+<f:view>
+<center>
+
+	<h:form id="form">
+		<p:growl id="growl" showDetail="false" sticky="false"  life="5000" /> 
+		
+	    	
+	    	<p:panel id="panel" header="Cadastro de Pessoas">
+			<p:panelGrid id="pgDados" columns="4" styleClass="semBorda" >
+				<p:outputLabel value="Nome:" />
+				<p:inputText value="#{pessoasController.entity.nome}" style="width:200px;" />
+	
+				<p:outputLabel value="Cpf:" />
+				<p:inputMask id="cpf" value="#{pessoasController.entity.cpf}"
+								mask="999.999.999-99" placeholder="CPF"
+								style="width:215px;"/>
+				
+				<p:outputLabel value="RG:" />
+				<p:inputText  value="#{pessoasController.entity.rg}"  
+					style="width:200px;" >  
+	                  </p:inputText>
+	            <p:outputLabel value="Logradouro:" />
+				<p:inputText value="#{pessoasController.entity.endereco}" style="width:215px;"/>
+				
+				<p:outputLabel value="Telefone:" />
+				<p:inputMask id="telefone"
+								value="#{pessoasController.entity.telefone}"
+								mask="(99) 99999-9999" placeholder="Telefone"
+								styleClass="entradaDeDados" />
+					
+			</p:panelGrid>
+
+		
+			
+			<p:commandButton value="Incluir" 
+				actionListener="#{pessoasController.insert}" 
+				disabled="#{pessoasController.entity.id != null}"
+				process="panel" update="form" />
+			
+			<p:commandButton value="Alterar" 
+				actionListener="#{pessoasController.update}" 
+				disabled="#{pessoasController.entity.id == null}"
+				process="panel" update="form" />
+	
+			<p:commandButton value="Excluir" 
+				actionListener="#{pessoasController.delete}" 
+				disabled="#{pessoasController.entity.id == null}"	
+				process="panel" update="form" />
+			
+			<p:commandButton value="Limpar" 
+				actionListener="#{pessoasController.clean}" 
+				process="panel" update="form" />
+
+				
+		</p:panel>
+					
+		<br/><p:separator id="separator" /><br/>
+
+		<p:dataTable id="dataTable" value="#{pessoasController.listaPessoas}" var="objeto"  >	
+			<p:column>
+				<f:facet name="header">Id</f:facet>
+	    				#{objeto.id}
+	    		</p:column>
+			<p:column>
+				<f:facet name="header">Nome</f:facet>
+	    				#{objeto.nome}
+	    		</p:column>
+			<p:column >
+				<f:facet name="header">CPF</f:facet>
+	    				#{objeto.cpf}
+	    		</p:column>
+			<p:column >
+				<f:facet name="header">RG</f:facet>
+	    				#{objeto.rg}
+	    		</p:column>
+	    		<p:column >
+				<f:facet name="header">Logradouro</f:facet>
+	    				#{objeto.endereco}
+	    		</p:column>
+	    		
+	    		<p:column >
+				<f:facet name="header">Telefone</f:facet>
+	    				#{objeto.telefone}
+	    		</p:column>
+			<p:column >
+				<f:facet name="header">Ação</f:facet>
+				<p:commandButton value="Editar" update="form" icon="fa fa-bug" >
+					<f:setPropertyActionListener
+						target="#{pessoasController.entity}" value="#{objeto}" />
+				</p:commandButton>
+			</p:column>
+	    		
+		</p:dataTable>
+	
+	</h:form>
+</center>	
+</f:view>
+
+</ui:define>
+</ui:composition>

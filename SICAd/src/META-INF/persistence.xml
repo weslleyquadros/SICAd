@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="SICAd">
+		<class>br.unitins.sac.model.Aluno</class>
+		<class>br.unitins.sac.model.Cidade</class>
+		<class>br.unitins.sac.model.Pessoas</class>
+
+		<shared-cache-mode>NONE</shared-cache-mode>
+
+		<properties>
+
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:postgresql://localhost:5432/web2?useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8" />
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.user" value="postgres" />
+			<property name="javax.persistence.jdbc.password" value="1234" />
+
+			<!-- <property name="eclipselink.ddl-generation" value="drop-and-create-tables" 
+				/> -->
+			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+
+			<property name="eclipselink.logging.level" value="ALL" />
+		</properties>
+	</persistence-unit>
+</persistence>

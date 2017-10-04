@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>SICAd</title>
+        <style type="text/css">  
+		    .ui-widget {  
+		        font-size: 12px !important;  
+		    }  	
+			.ui-top, .ui-top .ui-layout, .ui-top .ui-layout-bd, .ui-top .ui-layout-unit, .ui-top .ui-layout-unit-content {
+			    background-color:#98FB98; 
+			}
+			.autocomplete400, .ui-autocomplete input {
+	 		   width:400px;
+			}	
+			
+		</style>
+		 <h:outputStylesheet name="geral.css"/>
+		 <h:outputStylesheet library="awesome" name="css/font-awesome.css" />  
+    </h:head>
+    <h:body>
+	    
+	    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+ 
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+		    <p:graphicImage name="/images/ajaxloading.gif" />
+		</p:dialog>
+		
+        <p:layout id="layout" fullPage="true">
+        
+            
+            	<p:layoutUnit position="north" size="80" styleClass="ui-top">
+            		<center>
+						<h1> SICAd</h1>
+            	<h4>Sistema de Controle Acadêmico</h4>
+				</center>
+            	<p:graphicImage library="src" name="logo.png"
+						alt="Logo" height="50px"/>
+					
+		    	</p:layoutUnit>
+		    	
+		    	<p:layoutUnit position="west" size="200" styleClass="ui-top">
+		    		<div class="menu">
+		    		
+		<h:form>
+			<p:menu toggleable="true">
+			    		
+			    		
+			    		<p:menuitem value="Home"  ajax="false" action="/pages/home.xhtml"
+					icon="ui-icon-star" />
+				            
+				        
+				        <p:submenu label="Cadastro de Pessoas">
+				         <p:menuitem value="Pessoas" action="/pages/cadastroPessoas.xhtml" ajax="false" icon="ui-icon-person" />
+				       
+				            
+				        </p:submenu>
+				        <p:submenu label="Cadastro de Aluno">
+				            <p:menuitem value="Alunos" action="/pages/cadastroAluno.xhtml" ajax="false" icon="ui-icon-person" />
+				            <p:menuitem value="Cidades" action="/pages/cadastroCidade.xhtml" ajax="false" icon="ui-icon-disk" />
+				            <p:menuitem value="Realizar Matrícula"  icon="ui-icon-disk" />
+				            <p:menuitem value="Relatório" icon="ui-icon-document" />
+				        </p:submenu>
+				        
+				        <p:submenu label="Cadastro de Professor">
+				       		<p:menuitem value="Professor"  icon="ui-icon-person" />
+				            
+				            <p:menuitem value="Relatório" icon="ui-icon-document" />
+				            
+				        </p:submenu>
+				        <p:separator></p:separator>
+				       <p:menuitem value= "Curso" icon="ui-icon-extlink" />
+					<p:menuitem value= "Disciplina" icon="ui-icon-extlink" />
+					<p:menuitem value= "Turma" icon="ui-icon-extlink" />
+					
+					
+					</p:menu>
+				</h:form>
+				
+
+		
+	</div>
+		    	</p:layoutUnit>
+
+ 		    <p:layoutUnit position="center" style="border: none !important;">
+                   <ui:insert name="conteudo"/>
+		    </p:layoutUnit>
+
+		    <p:layoutUnit position="south"  size="30" styleClass="ui-top" >
+		    		<center>
+		    			<ui:insert name="conteudoRodape">
+                  		<h:outputText value="© 2017 Weslley Quadros. Todos os direitos reservados." />
+                  	</ui:insert>
+                  </center>
+                  
+		    </p:layoutUnit>
+		    	
+        </p:layout>
+    </h:body>
+</html>
